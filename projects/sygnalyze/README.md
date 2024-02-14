@@ -2,6 +2,12 @@
 
 Idiomatic Angular Signals with Super Powers!
 
+- [Sygnalyze 🚦](#sygnalyze-)
+  - [Installation](#installation)
+  - [API](#api)
+    - [`withToggle(writableSignal)`](#withtogglewritablesignal)
+    - [`immutablePatchState`](#immutablepatchstate)
+
 ## Installation
 
 `npm i sygnalyze`
