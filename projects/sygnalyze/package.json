@@ -1,0 +1,23 @@
+{
+  "name": "sygnalyze",
+  "description": "Angular Signals with Superpowers",
+  "version": "0.0.2",
+  "author": {
+    "name": "Tomasz Ducin",
+    "email": "tomasz@ducin.dev"
+  },
+  "license": "MIT",
+  "scripts": {
+    "build": "ng build sygnalyze"
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.2.0",
+    "@angular/core": "^17.2.0",
+    "@ngrx/signals": "^17.1.0"
+  },
+  "dependencies": {
+    "immer": "^10.0.3",
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}
