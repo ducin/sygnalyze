@@ -1,17 +1,26 @@
 import { WritableSignal } from '@angular/core'
 
 interface WithToggle {
+  /**
+   * Toggle the boolean value of the signal
+   */
   toggle(): void
 }
 
-export function withToggle(origin: WritableSignal<boolean>) {
-  if (typeof origin() !== 'boolean') {
-    throw new Error('The origin signal must have a boolean value')
+/**
+ * Enhance the signal with a toggle method
+ * 
+ * @param original The signal to be enhanced
+ * @returns 
+ */
+export function withToggle(original: WritableSignal<boolean>) {
+  if (typeof original() !== 'boolean') {
+    throw new Error('The original signal must have a boolean value')
   }
 
-  const enhancedSignal = Object.assign(origin, {
+  const enhancedSignal = Object.assign(original, {
     toggle() {
-      origin.update(current => !current)
+      original.update(current => !current)
     }
   }) as WritableSignal<boolean> & WithToggle
 

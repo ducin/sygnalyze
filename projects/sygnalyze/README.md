@@ -1,6 +1,6 @@
 # Sygnalyze 🚦
 
-Angular Signals with Super Powers!
+Idiomatic Angular Signals with Super Powers!
 
 ## Installation
 
@@ -8,9 +8,40 @@ Angular Signals with Super Powers!
 
 ## API
 
+### `withToggle(writableSignal)`
+
+```ts
+import { withToggle } from 'sygnalyze'
+
+export class TheComponent {
+  showTheThing = withToggle(signal(true))
+  ...
+
+  theMethod(){
+    this.showTheThing.toggle() // updates 
+  }
+}
+```
+
 ### `immutablePatchState`
 
 The NGRX Signal Store `patchState` function enhanced with [`immer` immutability](https://immerjs.github.io/immer/):
+
+```ts
+import { immutablePatchState } from 'sygnalyze/ngrx'
+
+export const Store = signalStore(
+  withMethods((store) => ({
+    updateOrder(order: 'asc' | 'desc'): void {
+      immutablePatchState(store, (draft) => { draft.filter.order = order });
+    },
+  })
+)
+```
+
+The `immutablePatchState` function callback can now **mutate** the state draft object and return nothing. `immer` will create a new object by applying all recorded changes. You don't have to worry about applying immutable changes manually.
+
+Compare with default approach:
 
 ```ts
 import { signalStore, withMethods, ... } from '@ngrx/signals'
@@ -19,8 +50,6 @@ import { immutablePatchState } from 'sygnalyze/ngrx'
 export const Store = signalStore(
   //...
   withMethods((store) => ({
-    // the function can mutate the state draft object and return nothing
-    // `immer` will create a new object by applying all recorded changes
     // state: WritableDraft<StateType>
     updateOrderMutative(order: 'asc' | 'desc'): void {
       immutablePatchState(store, (draft) => { draft.filter.order = order });

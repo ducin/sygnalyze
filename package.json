@@ -1,7 +1,7 @@
 {
   "name": "sygnalyze",
   "description": "Angular Signals with Superpowers",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": {
     "name": "Tomasz Ducin",
     "email": "tomasz@ducin.dev"
@@ -12,7 +12,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "publish": "ng build && cd dist/sygnalyze && npm publish"
   },
   "dependencies": {
     "@angular/animations": "^17.2.0",
