@@ -1,8 +1,8 @@
-# Sygnalyze 🚦
+# ![sygnalyze logo](./assets/logo/sygnalyze-logo-200.png)
 
-Idiomatic Angular Signals with Super Powers!
+Enhance 🚦 Angular Signals 🚦 with Super Powers!
 
-- [Sygnalyze 🚦](#sygnalyze-)
+- [](#)
   - [Installation](#installation)
   - [API](#api)
     - [`withToggle(writableSignal)`](#withtogglewritablesignal)
