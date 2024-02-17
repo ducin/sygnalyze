@@ -1,7 +1,7 @@
 {
   "name": "sygnalyze",
   "description": "Angular Signals with Superpowers",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": {
     "name": "Tomasz Ducin",
     "email": "tomasz@ducin.dev"
@@ -24,7 +24,9 @@
     "@angular/platform-browser": "^17.2.0",
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
+    "immer": "^10.0.3",
     "rxjs": "~7.8.0",
+    "ts-essentials": "^9.4.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },

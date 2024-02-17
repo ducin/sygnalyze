@@ -1,7 +1,7 @@
 {
   "name": "sygnalyze",
   "description": "Angular Signals with Superpowers",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": {
     "name": "Tomasz Ducin",
     "email": "tomasz@ducin.dev"

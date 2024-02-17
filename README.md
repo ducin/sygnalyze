@@ -1,11 +1,15 @@
-# ![sygnalyze logo](./assets/logo/sygnalyze-logo-200.png)
+# ![Sygnalyze](./assets/logo/sygnalyze-logo-200.png)
 
 Enhance 🚦 Angular Signals 🚦 with Super Powers!
 
 - [](#)
   - [Installation](#installation)
   - [API](#api)
-    - [`withToggle(writableSignal)`](#withtogglewritablesignal)
+    - [`sygnal`](#sygnal)
+      - [readonly `update`](#readonly-update)
+      - [`draftUpdate(mutatingCallback)`](#draftupdatemutatingcallback)
+    - [`memento` / `withMemento(writableSignal)`](#memento--withmementowritablesignal)
+    - [`toggle` / `withToggle(writableSignal)`](#toggle--withtogglewritablesignal)
     - [`immutablePatchState`](#immutablepatchstate)
 
 ## Installation
@@ -14,17 +18,81 @@ Enhance 🚦 Angular Signals 🚦 with Super Powers!
 
 ## API
 
-### `withToggle(writableSignal)`
+### `sygnal`
+
+Enhanced Angular Signal - with 2 differences:
+
+#### readonly `update`
+
+The `update` method parameter (current value) is `DeepReadonly` in order to avoid unintentional mutations
 
 ```ts
-import { withToggle } from 'sygnalyze'
+const person = sygnal({
+  name: 'john',
+  age: 40
+})
+sygnal.update(current => ...)
+//            ^? current is DeepReadonly
+```
+
+#### `draftUpdate(mutatingCallback)`
+
+An additional method `draftUpdate(mutatingCallback)` allows to mutate the current value of the signal, but thanks to using `immer`, the value is replaced with an immutable 
+
+```ts
+const person = sygnal({
+  name: 'john',
+  age: 40
+})
+
+person.draftUpdate(draft => {
+  draft.age++;
+})
+```
+
+In above code, a new object is set as the value, so the signal notifies all its dependents.
+
+### `memento` / `withMemento(writableSignal)`
+
+Make a snapshot (*memento*) of the signal's value at a certain point in time. Whenever memento gets restored, the signal goes back to that value.
+
+```ts
+import { memento, withMemento, Memento } from 'sygnalyze'
 
 export class TheComponent {
-  showTheThing = withToggle(signal(true))
+  item = memento({ age: 40 }) // Sygnal
+  // or:
+  item = withMemento(signal({ age: 40 })) // original Signal
+  ...
+
+  memento?: Memento
+
+  createMemento(){
+    this.memento = this.item.memento()
+  }
+
+  restoreMemento(){
+    this.memento?.restore()
+  }
+}
+```
+
+### `toggle` / `withToggle(writableSignal)`
+
+Creates a boolean signal with simple `toggle()` updating method.
+
+```ts
+import { toggle, withToggle } from 'sygnalyze'
+
+export class TheComponent {
+  showTheThing = toggle(true) // Sygnal
+  // or:
+  showTheThing = withToggle(signal(true)) // original Signal
+
   ...
 
   theMethod(){
-    this.showTheThing.toggle() // updates 
+    this.showTheThing.toggle()
   }
 }
 ```
