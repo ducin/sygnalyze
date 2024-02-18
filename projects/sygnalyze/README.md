@@ -4,6 +4,8 @@ Enhance 🚦 Angular Signals 🚦 with Super Powers!
 
 - [](#)
   - [Installation](#installation)
+  - [Online Demo](#online-demo)
+  - [Why?](#why)
   - [API](#api)
     - [`sygnal`](#sygnal)
       - [readonly `update`](#readonly-update)
@@ -15,6 +17,16 @@ Enhance 🚦 Angular Signals 🚦 with Super Powers!
 ## Installation
 
 `npm i sygnalyze`
+
+## Online Demo
+
+👉 [stackblitz.com/edit/sygnalyze](https://stackblitz.com/edit/sygnalyze)
+
+## Why?
+
+- `sygnal` is a tiny wrapper which improve Angular `signal` DX
+- that means that 100% runtime of Angular signals is preserved and are meant to be always compatible
+- i.e. `computed`, `effects`, `toSignal`/`toObservable` will work with `sygnal` the same way as with `signal`
 
 ## API
 

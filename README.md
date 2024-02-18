@@ -4,6 +4,8 @@ Enhance 🚦 Angular Signals 🚦 with Super Powers!
 
 - [](#)
   - [Installation](#installation)
+  - [Online Demo](#online-demo)
+  - [Why?](#why)
   - [API](#api)
     - [`sygnal`](#sygnal)
       - [readonly `update`](#readonly-update)
@@ -16,6 +18,16 @@ Enhance 🚦 Angular Signals 🚦 with Super Powers!
 
 `npm i sygnalyze`
 
+## Online Demo
+
+👉 [stackblitz.com/edit/sygnalyze](https://stackblitz.com/edit/sygnalyze)
+
+## Why?
+
+- `sygnal` is a tiny wrapper which improve Angular `signal` DX
+- that means that 100% runtime of Angular signals is preserved and are meant to be always compatible
+- i.e. `computed`, `effects`, `toSignal`/`toObservable` will work with `sygnal` the same way as with `signal`
+
 ## API
 
 ### `sygnal`
@@ -27,12 +39,15 @@ Enhanced Angular Signal - with 2 differences:
 The `update` method parameter (current value) is `DeepReadonly` in order to avoid unintentional mutations
 
 ```ts
-const person = sygnal({
+import { sygnal } from 'sygnalyze'; 
+
+const item = sygnal({
   name: 'john',
   age: 40
 })
-sygnal.update(current => ...)
-//            ^? current is DeepReadonly
+
+item.update(current => ...)
+//          ^? current is DeepReadonly
 ```
 
 #### `draftUpdate(mutatingCallback)`
@@ -40,12 +55,14 @@ sygnal.update(current => ...)
 An additional method `draftUpdate(mutatingCallback)` allows to mutate the current value of the signal, but thanks to using `immer`, the value is replaced with an immutable 
 
 ```ts
-const person = sygnal({
+import { sygnal } from 'sygnalyze'; 
+
+const item = sygnal({
   name: 'john',
   age: 40
 })
 
-person.draftUpdate(draft => {
+item.draftUpdate(draft => {
   draft.age++;
 })
 ```
@@ -57,12 +74,14 @@ In above code, a new object is set as the value, so the signal notifies all its 
 Make a snapshot (*memento*) of the signal's value at a certain point in time. Whenever memento gets restored, the signal goes back to that value.
 
 ```ts
+import { signal } from '@angular/core';
 import { memento, withMemento, Memento } from 'sygnalyze'
 
 export class TheComponent {
-  item = memento({ age: 40 }) // Sygnal
+  item = memento({ age: 40 }) // WritableSygnal
   // or:
   item = withMemento(signal({ age: 40 })) // original Signal
+  
   ...
 
   memento?: Memento
@@ -82,6 +101,7 @@ export class TheComponent {
 Creates a boolean signal with simple `toggle()` updating method.
 
 ```ts
+import { signal } from '@angular/core';
 import { toggle, withToggle } from 'sygnalyze'
 
 export class TheComponent {
