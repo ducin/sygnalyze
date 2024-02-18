@@ -39,5 +39,5 @@ export function withMemento<T>(original: WritableSignal<T>) {
   return enhancedSignal
 }
 
-export const memento = <T>(initialValue: T, options?: CreateSignalOptions<T>): WritableSygnal<T> =>
+export const memento = <T>(initialValue: T, options?: CreateSignalOptions<T>): WritableSygnal<T> & WithMemento =>
   withMemento(sygnal(initialValue, options))

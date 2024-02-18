@@ -30,5 +30,5 @@ export function withToggle(original: WritableSignal<boolean>) {
   return enhancedSignal
 }
 
-export const toggle = (initialValue: boolean, options?: CreateSignalOptions<boolean>): WritableSygnal<boolean> =>
+export const toggle = (initialValue: boolean, options?: CreateSignalOptions<boolean>): WritableSygnal<boolean> & WithToggle =>
   withToggle(sygnal(initialValue, options))

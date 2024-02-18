@@ -1,7 +1,7 @@
 {
   "name": "sygnalyze",
   "description": "Angular Signals with Superpowers",
-  "version": "0.0.4",
+  "version": "0.0.7",
   "author": {
     "name": "Tomasz Ducin",
     "email": "tomasz@ducin.dev"
@@ -13,7 +13,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "publish": "ng build && cd dist/sygnalyze && npm publish"
+    "publish": "ng build sygnalyze && cd dist/sygnalyze && npm publish"
   },
   "dependencies": {
     "@angular/animations": "^17.2.0",
@@ -26,6 +26,7 @@
     "@angular/router": "^17.2.0",
     "immer": "^10.0.3",
     "rxjs": "~7.8.0",
+    "sygnalyze": "^0.0.5",
     "ts-essentials": "^9.4.1",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

@@ -2,8 +2,11 @@ import { Component, NgZone, inject, signal } from '@angular/core';
 import { JsonPipe } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
-import { immutablePatchState } from '../../../../dist/sygnalyze/ngrx'
-import { Memento, sygnal, withMemento, SygnalSet } from '../../../../dist/sygnalyze'
+// import { immutablePatchState } from '../../../../dist/sygnalyze/ngrx'
+// import { Memento, sygnal, withMemento, SygnalSet } from '../../../../dist/sygnalyze'
+
+import { immutablePatchState } from 'sygnalyze/ngrx'
+import { Memento, sygnal, withMemento, SygnalSet } from 'sygnalyze'
 
 @Component({
   selector: 'app-root',
